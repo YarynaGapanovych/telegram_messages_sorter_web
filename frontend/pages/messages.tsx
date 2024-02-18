@@ -15,7 +15,6 @@ function Messages() {
     <div>
       <h1>Messages</h1>
       <div className="my-10 ">
-        {/* <FileInput /> */}
         <Space />
         <DatePick onChange={onChange} />
       </div>
