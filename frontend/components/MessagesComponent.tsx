@@ -11,7 +11,7 @@ interface Person {
 
 interface MessagesProps {
   date: string;
-  fileData: {};
+  fileData: { chats: { list: [] } };
 }
 
 interface Message {
@@ -32,10 +32,7 @@ function MessagesComponent({ date, fileData }: MessagesProps) {
   }, [date]);
 
   useEffect(() => {
-    console.log("fileData:", fileData);
-
     const filteredMessages = fileData?.chats?.list?.flatMap((person: any) => {
-      console.log("person.messages:", person.messages);
       const messagesOnDesiredDate = person.messages.filter((message: any) =>
         message.date.startsWith(desiredDate)
       );
@@ -52,7 +49,6 @@ function MessagesComponent({ date, fileData }: MessagesProps) {
           }
         });
     });
-    console.log("filteredMessages", filteredMessages);
     setMessages(filteredMessages);
   }, [fileData, desiredDate]);
 

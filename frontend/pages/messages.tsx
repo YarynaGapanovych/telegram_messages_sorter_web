@@ -8,7 +8,6 @@ function Messages() {
   const [date, setDate] = useState<string>("2022-10-09");
 
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
     setDate(dateString);
   };
 

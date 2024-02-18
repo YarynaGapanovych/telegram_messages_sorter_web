@@ -6,11 +6,9 @@ import { DatePickerProps } from "antd";
 
 function DownloadData() {
   const [messages, setMessages] = useState({});
-  // console.log("🚀 ~ DownloadData ~ messages:", messages);
   const [date, setDate] = useState<string>("2022-10-09");
 
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
-    console.log(date, dateString);
     setDate(dateString);
   };
 
@@ -19,7 +17,6 @@ function DownloadData() {
     reader.onload = (e: ProgressEvent<FileReader>) => {
       try {
         const text = e.target?.result;
-        console.log("🚀 ~ handleFileSelect ~ e.target?.result:", text);
         // Parse the file result as JSON
         const data = text ? JSON.parse(text as string) : {};
         // Now data is an object that should have the structure of your file,
