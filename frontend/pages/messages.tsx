@@ -1,11 +1,10 @@
-import MessagesComponent from "../components/MessagesComponent";
-import React, { useState } from "react";
-import { Space } from "antd";
 import type { DatePickerProps } from "antd";
+import { Space } from "antd";
+import { useState } from "react";
 import DatePick from "../components/DatePick";
 
 function Messages() {
-  const [date, setDate] = useState<string>("2022-10-09");
+  const [date, setDate] = useState<string>(new Date().toLocaleString());
 
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     setDate(dateString);
@@ -16,7 +15,7 @@ function Messages() {
       <h1>Messages</h1>
       <div className="my-10 ">
         <Space />
-        <DatePick onChange={onChange} />
+        <DatePick onChange={onChange} value={date} />
       </div>
       {/* <MessagesComponent date={date} /> */}
     </div>

@@ -1,14 +1,14 @@
 import React from "react";
-import { Button, DatePicker } from "antd";
-import type { DatePickerProps } from "antd";
-import Messages from "./MessagesComponent";
+import { DatePicker } from "antd";
+import dayjs from "dayjs";
 
 interface DatePick {
+  value: any;
   onChange: (value: any, dateString: string) => void;
 }
 
-function DatePick({ onChange }: DatePick) {
-  return <DatePicker onChange={onChange} />;
+function DatePick({ value, onChange }: DatePick) {
+  return <DatePicker value={dayjs(value)} onChange={onChange} />;
 }
 
 export default DatePick;
