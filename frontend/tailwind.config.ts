@@ -16,5 +16,6 @@ const config: Config = {
     },
   },
   plugins: [],
+  blocklist: [],
 };
 export default config;
