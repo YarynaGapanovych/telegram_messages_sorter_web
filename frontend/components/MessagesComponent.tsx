@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import { useEffect, useState } from "react";
 // import jsonData from "../db.json";
 // import jsonData from './db-test.json';
 
@@ -11,7 +12,7 @@ interface Person {
 
 interface MessagesProps {
   date: string;
-  fileData: { chats: { list: [] } };
+  fileData: { chats: { list: [] }; personal_information: { user_id: number } };
 }
 
 interface Message {
@@ -26,6 +27,8 @@ interface Message {
 function MessagesComponent({ date, fileData }: MessagesProps) {
   const [desiredDate, setDesiredDate] = useState(date); // Date to filter messages
   const [messages, setMessages] = useState<Message[]>([]);
+
+  const myId = `user${fileData.personal_information?.user_id}`;
 
   useEffect(() => {
     setDesiredDate(date || Date.now().toLocaleString());
@@ -52,25 +55,44 @@ function MessagesComponent({ date, fileData }: MessagesProps) {
     setMessages(filteredMessages);
   }, [fileData, desiredDate]);
 
+  if (!messages?.length) {
+    return (
+      <div className="mt-10">-- There is no messaged for this date --</div>
+    );
+  }
+
   return (
-    <ul>
+    <ul className="flex flex-col w-1/2 border-solid border-2  border-slate-200 rounded-lg m-10 bg-gradient-to-b from-amber-100 to-lime-100">
       {messages?.map((message: any) => {
+        const isMyMessage = message.from_id === myId;
+
         return (
           message.id && (
             <li
-              className={`w-fill rounded border-solid border-2 border-sky-500 m-10 p-2 flex flex-col w-fit justify-self-end`}
+              className={`mx-4 p-2 w-fit flex flex-col ${
+                isMyMessage ? "self-end" : "self-start"
+              }`}
               key={message.id} // Use the unique key here
             >
               <div
-                className={`w-fit  ${
-                  message.from === "Yaryna Hapanovych"
-                    ? "bg-green-300"
-                    : "bg-red-400"
-                }`}
+                className={`w-fit text-slate-600 ${isMyMessage && "self-end"}`}
               >
                 {message.from}
               </div>
-              <div className="text-left ml-auto">{message.text}</div>
+              <div
+                className={`w-fill border-solid border-2 rounded-lg x border-slate-300 p-2 px-4 flex flex-col w-fit  ${
+                  isMyMessage ? "self-end" : "self-start"
+                } ${isMyMessage ? "bg-orange-50" : "bg-slate-50"}`}
+              >
+                {message.text}
+              </div>
+              <div
+                className={`text-sm text-slate-600 ${
+                  isMyMessage && "self-end"
+                }`}
+              >
+                {dayjs(message.date).format("hh:mm:ss")}
+              </div>
             </li>
           )
         );

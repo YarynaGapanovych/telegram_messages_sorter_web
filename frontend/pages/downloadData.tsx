@@ -1,14 +1,14 @@
+import { DatePickerProps } from "antd";
 import { useState } from "react";
+import DatePick from "../components/DatePick";
 import FileInput from "../components/FileInput";
 import MessagesComponent from "../components/MessagesComponent";
-import DatePick from "../components/DatePick";
-import { DatePickerProps } from "antd";
 
 function DownloadData() {
   const [messages, setMessages] = useState({});
-  const [date, setDate] = useState<string>("2022-10-09");
+  const [date, setDate] = useState<string>(new Date().toLocaleString());
 
-  const onChange: DatePickerProps["onChange"] = (date, dateString) => {
+  const onChange: DatePickerProps["onChange"] = (_date, dateString) => {
     setDate(dateString);
   };
 
@@ -28,17 +28,17 @@ function DownloadData() {
     };
     reader.readAsText(file);
   };
+
   return (
-    <div>
-      <h1>Download Data</h1>
-      <div className="flex">
+    <div className="flex flex-col justify-center mt-20 w-full items-center">
+      <h1 className="text-lg  font-semibold">Download Data</h1>
+      <div className="w-80">
         <div>
-          <div>Chose file with telegram data:</div>
           <FileInput onFileSelect={handleFileSelect} />
         </div>
-        <div className="mt-[10px]">
-          <div>Chose needed date:</div>
-          <DatePick onChange={onChange} />
+        <div className="mt-4 flex gap-3">
+          <span>Chose needed date:</span>
+          <DatePick value={date} onChange={onChange} />
         </div>
       </div>
       <MessagesComponent date={date} fileData={messages as any} />

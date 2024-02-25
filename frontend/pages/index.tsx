@@ -1,12 +1,19 @@
 import Link from "next/link";
+import { Button } from "../components/ui";
+import "../output.css";
 
 export default function Page() {
   return (
-    <>
-      <Link href="/downloadData">Download Data and Sort your messages</Link>
+    <div style={{ display: "flex", justifyContent: "center", marginTop: 250 }}>
+      <Button>
+        <Link
+          style={{ color: "#fff", textDecoration: "none", fontSize: "26px" }}
+          href="/downloadData"
+        >
+          Upload Telegram Data and Filter your messages by Date
+        </Link>
+      </Button>
       {/* <Link href="/messages">See messages</Link> */}
-
-      <h1>Hello, Next.js!</h1>
-    </>
+    </div>
   );
 }
