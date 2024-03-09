@@ -11,7 +11,7 @@ interface Person {
 }
 
 interface MessagesProps {
-  date: string;
+  date: string | string[];
   fileData: { chats: { list: [] }; personal_information: { user_id: number } };
 }
 

@@ -6,7 +6,9 @@ import MessagesComponent from "../components/MessagesComponent";
 
 function DownloadData() {
   const [messages, setMessages] = useState({});
-  const [date, setDate] = useState<string>(new Date().toLocaleString());
+  const [date, setDate] = useState<string | string[]>(
+    new Date().toLocaleString()
+  );
 
   const onChange: DatePickerProps["onChange"] = (_date, dateString) => {
     setDate(dateString);

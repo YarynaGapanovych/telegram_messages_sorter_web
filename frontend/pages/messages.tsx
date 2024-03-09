@@ -4,7 +4,9 @@ import { useState } from "react";
 import DatePick from "../components/DatePick";
 
 function Messages() {
-  const [date, setDate] = useState<string>(new Date().toLocaleString());
+  const [date, setDate] = useState<string | string[]>(
+    new Date().toLocaleString()
+  );
 
   const onChange: DatePickerProps["onChange"] = (date, dateString) => {
     setDate(dateString);
