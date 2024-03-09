@@ -1,10 +1,9 @@
-import React from "react";
 import { DatePicker } from "antd";
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 
 interface DatePick {
   value: any;
-  onChange: (value: any, dateString: string) => void;
+  onChange: (days: Dayjs, dateString: string | string[]) => void;
 }
 
 function DatePick({ value, onChange }: DatePick) {
